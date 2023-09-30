@@ -43,7 +43,7 @@ interface IProps{
     rowData?: IRowData;
 }
 
-export function DesignationCreateUpdate({isOpen,setIsOpen, id, rowData}: IProps) {
+export function EmployeeCreateUpdate({isOpen,setIsOpen, id, rowData}: IProps) {
   const queryClient = useQueryClient();
   const [districtId, setDistrictId] = useState<string>("")
   const [upazila, setUpazila] = useState<string>("")

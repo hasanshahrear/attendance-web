@@ -1,5 +1,6 @@
 import { useField, useFormikContext } from "formik";
 import Select, { MultiValue, SingleValue } from "react-select";
+//@ts-ignore
 import { StateManagerProps } from "react-select/dist/declarations/src/useStateManager";
 
 const customStyles = {
@@ -69,7 +70,7 @@ export function FormikReactSelect(props: Props) {
   });
 
   //get the value using flattenedOptions and field.value
-  const value = flattenedOptions?.filter((o) => {
+  const value = flattenedOptions?.filter((o: any) => {
     const isArrayValue = Array?.isArray(field?.value);
     if (isArrayValue) {
       const values = field?.value as Array<unknown>;

@@ -19,7 +19,7 @@ interface IProps{
     setIsOpen: Dispatch<SetStateAction<boolean>>
     isOpen: boolean;
     id: number | string;
-    rowData?: IRowData;
+    rowData?: any;
 }
 
 export function HolidayCreateUpdate({isOpen,setIsOpen, id, rowData}: IProps) {
@@ -57,7 +57,7 @@ export function HolidayCreateUpdate({isOpen,setIsOpen, id, rowData}: IProps) {
   );
 
     const onSubmit = async (values: CreateUpdateHolidayType) => await mutate(values);
-    const dateTime = DateTime.fromISO(rowData?.holyDay, { zone: 'utc' });
+    const dateTime = DateTime.fromISO(rowData?.holyDay  || "", { zone: 'utc' });
     const formattedDate = dateTime.toFormat("EEE MMM dd yyyy");
 
     return (
@@ -66,9 +66,9 @@ export function HolidayCreateUpdate({isOpen,setIsOpen, id, rowData}: IProps) {
       <Formik 
         initialValues={ id ? {
           id: rowData?._id,
-          holyDay:  formattedDate ,
+          holyDay:  formattedDate,
           remarks: rowData?.remarks,
-        } as CreateUpdateHolidayType : initialValues}
+        } as any : initialValues}
         validationSchema={createUpdateHolidaySchema}
         onSubmit={onSubmit}
       >

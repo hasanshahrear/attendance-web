@@ -8,7 +8,7 @@ import { Button } from "../ui/button"
 import { CustomDataTable, TableAction } from "../ui/data-table"
 import { Modal } from "../ui/modal"
 import { toast } from "../ui/use-toast"
-import { DesignationCreateUpdate } from "./employee-create-update-model.component"
+import { EmployeeCreateUpdate } from "./employee-create-update-model.component"
 import { deleteEmployee } from "./form.config"
 
 export function EmployeeList() {
@@ -79,14 +79,14 @@ export function EmployeeList() {
             header: () => ( <div style={{  textAlign:"center" }}>Actions</div>),
             cell: ({row}) => {
               return <TableAction  
-                handleEdit={ ()=> {setId(row?.original?._id); setIsOpen(true); setRowData(row?.original)} }
+                // handleEdit={ ()=> {setId(row?.original?._id); setIsOpen(true); setRowData(row?.original)} }
                 handleDelete={()=> {handleDelete(); setDeletedId(row?.original?._id)}}
               />
             }
           },
         ]} 
       />
-      <DesignationCreateUpdate  isOpen={isOpen} setIsOpen={setIsOpen} id={id} rowData={rowData} />
+      <EmployeeCreateUpdate  isOpen={isOpen} setIsOpen={setIsOpen} id={id}  />
       <Modal isOpen={isDelete} setIsOpen={setIsDelete}  >
         <h3 className="text-2xl font-bold mb-2">Are you sure?</h3>
         <p>Do you want to delete the district?</p>
