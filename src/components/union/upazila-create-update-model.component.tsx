@@ -100,7 +100,7 @@ export function UnionCreateUpdate({isOpen,setIsOpen, id, rowData}: IProps) {
                   label: item?.district_name
                 }))}
                 requiredIcon="*"
-                onSelect={(value)=>{
+                onSelect={(value:any)=>{
                   setDistrictId(value?.value as string)
                 }}
               />

@@ -54,7 +54,7 @@ type Props = {
   "value" | "onChange"
 >;
 
-export function FormikReactSelect(props: Props) {
+export function FormikReactSelect(props: any) {
   const { name, label, error, helperText, apiError, requiredIcon, onSelect, ...restProps } =
     props;
   const [field, meta] = useField(name);

@@ -182,7 +182,7 @@ export function EmployeeCreateUpdate({isOpen,setIsOpen, id, rowData}: IProps) {
                     label: item?.district_name
                   }))}
                   requiredIcon="*"
-                  onSelect={(value)=>{
+                  onSelect={(value:any)=>{
                     setDistrictId(value?.value as string)
                   }}
                 />
@@ -197,7 +197,7 @@ export function EmployeeCreateUpdate({isOpen,setIsOpen, id, rowData}: IProps) {
                     label: item?.sub_district_name
                   }))}
                   requiredIcon="*"
-                  onSelect={(value)=>{
+                  onSelect={(value:any)=>{
                     setUpazila(value?.value as string)
                   }}
                 />
