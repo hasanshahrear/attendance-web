@@ -1,3 +1,5 @@
+'use client'
+
 import { MouseEventHandler } from "react";
 import { Button } from "../ui/button";
 

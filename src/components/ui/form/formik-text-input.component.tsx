@@ -1,3 +1,5 @@
+'use client'
+
 import { Field, FieldProps, GenericFieldHTMLAttributes, } from "formik";
 import { InputHTMLAttributes, useId } from "react";
 import { Input } from "../input";

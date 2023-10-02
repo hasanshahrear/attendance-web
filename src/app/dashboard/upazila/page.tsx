@@ -1,3 +1,4 @@
+'use client'
 import { UpazilaList } from "@/components/upazila";
 
 export default function District() {

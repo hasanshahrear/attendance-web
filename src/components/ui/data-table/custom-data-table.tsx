@@ -1,3 +1,5 @@
+'use client'
+
 import { ApiClient } from "@/components/api/client";
 import { useQuery } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";

@@ -1,3 +1,4 @@
+'use client'
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { Form, Formik } from "formik";

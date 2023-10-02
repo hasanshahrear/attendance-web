@@ -1,3 +1,4 @@
+'use client'
 import * as yup from "yup"
 import { ApiClient } from "../api/client"
 import { Api } from "../api/endpoints"

@@ -27,7 +27,7 @@ export enum Api {
 
   // Employee
   GetAllEmployee = `${ApiPrefix}/employees/get-all/`,
-  CreateEmployee = `${ApiPrefix}/employees/`,
+  CreateEmployee = `${ApiPrefix}/sign-up/`,
 
   // Holiday
   GetAllHoliday = `${ApiPrefix}/holidays/get-all`,

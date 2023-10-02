@@ -1,3 +1,5 @@
+'use client'
+
 import { AiFillDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 interface IProps{
