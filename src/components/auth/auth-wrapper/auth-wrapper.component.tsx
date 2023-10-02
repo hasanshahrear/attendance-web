@@ -1,4 +1,4 @@
-
+'use client'
 interface IPageProps{
     children: React.ReactNode;
 }
