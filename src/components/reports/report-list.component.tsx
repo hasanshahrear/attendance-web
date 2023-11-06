@@ -3,24 +3,20 @@ import { getData } from "./config"
 
 export function Reports(){
 
-
-   
     const {data, isLoading, isError} = useQuery({
         queryKey: ["all-report"],
         queryFn:() => getData(),
     })
 
-    console.log({data})
-
     return (
         <div className="px-5 lg:px-10 gap-10 flex flex-col mb-10">
             {
-               data && data?.data?.length > 0 ? data?.data?.map((union, i) => {
+               data && data?.data?.length > 0 ? data?.data?.map((union: any, i : any) => {
                 return ( 
                     <div className="bg-white rounded-lg shadow-[1px_3px_15px_rgba(0,0,0,0.15)]" key={i}>
                         <p key={i} className="p-5 pb-0 text-xl font-bold text-[#0d3b54]">Upazila: {union?._id?.sub_district_name}</p>
                         {
-                            union?.unions?.map((upazila, j)=>{
+                            union?.unions?.map((upazila: any, j: any)=>{
                                 return (
                                     <div className=" border bg-[#f9f9f9] p-5 m-5 rounded" key={j}>
                                         <p key={j} className="pb-5 text-lg font-bold text-[#ee9836]">Union: {upazila?.union?.union_name}</p>
@@ -37,7 +33,7 @@ export function Reports(){
                                             </thead>
                                             <tbody> 
                                                 {
-                                                    upazila?.data?.map((info, k) => {
+                                                    upazila?.data?.map((info: any, k: any) => {
                                                         return(
                                                             <tr key={k} className=" p-5">
                                                                 <td className="text-left p-4 border border-slate-400">{info?.user?.first_name + " " + info?.user?.last_name}</td>
