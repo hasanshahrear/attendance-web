@@ -32,4 +32,8 @@ export enum Api {
   // Holiday
   GetAllHoliday = `${ApiPrefix}/holidays/get-all`,
   CreateHoliday = `${ApiPrefix}/holidays/`,
+
+
+  // Reports
+  Reports = `${ApiPrefix}/report/all`
 }

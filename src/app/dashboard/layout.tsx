@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link';
-import { Menu, MenuItem, Sidebar } from 'react-pro-sidebar';
+import { Menu, MenuItem, Sidebar, SubMenu } from 'react-pro-sidebar';
 
 export default function DashboardLayout({
   children,
@@ -10,7 +10,7 @@ export default function DashboardLayout({
   
   return (
     <div className="main flex min-h-screen">
-      <Sidebar className="sidebar w-[260px] min-h-screen bg-[#464646]">
+      <Sidebar className="sidebar w-[260px] min-h-screen bg-[#0b2838] text-white">
         <h1 className='text-[56px] text-center py-10'>Logo</h1>
         <Menu>
           <MenuItem component={<Link href="/dashboard" />}> Dashboard </MenuItem>
@@ -19,7 +19,11 @@ export default function DashboardLayout({
           <MenuItem component={<Link href="/dashboard/union" />} > Union </MenuItem>
           <MenuItem component={<Link href="/dashboard/designation" />} > Designation </MenuItem>
           <MenuItem component={<Link href="/dashboard/employee" />} > Employee </MenuItem>
-          <MenuItem component={<Link href="/dashboard/holiday" />} > Holiday </MenuItem>
+          <MenuItem component={<Link href="/dashboard/holiday" />} > Holiday </MenuItem>          
+          <SubMenu label="Reports">
+            <MenuItem component={<Link href="/dashboard/reports" />} > Today Reports </MenuItem>
+            <MenuItem> Line charts </MenuItem>
+          </SubMenu>
         </Menu>
       </Sidebar>
       <div className="content w-[calc(100%-260px)] h-full">
@@ -27,7 +31,7 @@ export default function DashboardLayout({
 
         </div>
         <div>
-        {children}
+          {children}
         </div>
       </div>
     </div>

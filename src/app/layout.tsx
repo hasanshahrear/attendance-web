@@ -11,10 +11,10 @@ export default function RootLayout({
   return (
       <html lang="en" suppressHydrationWarning={true}>
         <body>
-        <GlobalLayout >
-          {children}
-        </GlobalLayout>
-        <Toaster />
+          <GlobalLayout >
+            {children}
+          </GlobalLayout>
+          <Toaster />
         </body>
       </html>
   )
