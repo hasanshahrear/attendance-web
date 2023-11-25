@@ -41,8 +41,8 @@ export function Reports(){
                                                                 <td className="text-center p-4 border border-slate-400">{info?.designation?.designation_name}</td>
                                                                 <td className="text-center p-4 border border-slate-400">
                                                                     <p>
-                                                                       {
-                                                                           info?.check_in[0]?.time ?? "No Check out"
+                                                                        {
+                                                                           info?.check_in[0]?.time ?? "No Check In"
                                                                         }
                                                                     </p>
                                                                     <p>
@@ -64,7 +64,7 @@ export function Reports(){
                                                                     </p>
                                                                 </td>
                                                                 <td className="text-center p-4 border border-slate-400">
-                                                                    {info?.remarks === "Present" ? (<p className="py-0.5  bg-green-500 rounded-3xl">Present</p>) : info?.remarks === "Absent" ? (<p className="py-0.5  bg-red-500 rounded-3xl">Present</p>) : (<p className="py-0.5  bg-gray-500 rounded-3xl">Leave</p>)}
+                                                                    {info?.remarks === "Present" ? (<p className="py-0.5  bg-green-500 rounded-3xl">Present</p>) : info?.remarks === "Absent" ? (<p className="py-0.5  bg-red-500 rounded-3xl">Absent</p>) : (<p className="py-0.5  bg-gray-500 rounded-3xl">{info?.remarks}</p>)}
                                                                 </td>
                                                             </tr>
                                                         )
