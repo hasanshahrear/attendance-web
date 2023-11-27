@@ -94,21 +94,16 @@ export function Reports(){
                                 setFieldValue("union", "")
                             }}
                         />
-                        {
-                            values?.upazila ? (
-                                <FormikReactSelect
-                                name="union" 
-                                label="Union"
-                                isLoading={isLoadingGetAllUnion}
-                                options={dataGetAllUnion?.data?.map((item)=> ({
-                                    value: item?._id,
-                                    label: item?.union_name
-                                }))}
-                                requiredIcon="*"
-                            />
-
-                            ) : ""
-                        }
+                        <FormikReactSelect
+                            name="union" 
+                            label="Union"
+                            isLoading={isLoadingGetAllUnion}
+                            options={dataGetAllUnion?.data?.map((item)=> ({
+                                value: item?._id,
+                                label: item?.union_name
+                            }))}
+                            requiredIcon="*"
+                        />
                             
                         <FormikSubmitButton >Filter</FormikSubmitButton>
                         <FormikResetButton>Reset</FormikResetButton>
