@@ -9,10 +9,12 @@ import { CustomDataTable, TableAction } from "../ui/data-table"
 import { Modal } from "../ui/modal"
 import { toast } from "../ui/use-toast"
 import { EmployeeCreateUpdate } from "./employee-create-update-model.component"
+import { EmployeeUpdate } from "./employee-update-model.component"
 import { deleteEmployee } from "./form.config"
 
 export function EmployeeList() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isUpdate, setIsUpdate] = useState<boolean>(false)
   const [isDelete, setIsDelete] = useState<boolean>(false)
   const [deleteId, setDeletedId] = useState<number | string>("")
 
@@ -78,15 +80,17 @@ export function EmployeeList() {
             id: "1",
             header: () => ( <div style={{  textAlign:"center" }}>Actions</div>),
             cell: ({row}) => {
+              console.log({row})
               return <TableAction  
-                // handleEdit={ ()=> {setId(row?.original?._id); setIsOpen(true); setRowData(row?.original)} }
+                handleEdit={ ()=> {setId(row?.original?._id);  setRowData(row?.original); setIsUpdate(true);} }
                 handleDelete={()=> {handleDelete(); setDeletedId(row?.original?._id)}}
               />
             }
           },
         ]} 
       />
-      <EmployeeCreateUpdate  isOpen={isOpen} setIsOpen={setIsOpen} id={id}  />
+      <EmployeeCreateUpdate  isOpen={isOpen} setIsOpen={setIsOpen}   />
+      <EmployeeUpdate  isOpen={isUpdate} setIsOpen={setIsUpdate} id={id} rowData={rowData as any}  />
       <Modal isOpen={isDelete} setIsOpen={setIsDelete}  >
         <h3 className="text-2xl font-bold mb-2">Are you sure?</h3>
         <p>Do you want to delete the district?</p>

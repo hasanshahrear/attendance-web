@@ -13,7 +13,7 @@ import { FormikReactSelect } from "../ui/form/formik-react-select.component";
 import { FormikSubmitButton } from "../ui/form/formik-submit-button.component";
 import { Modal } from '../ui/modal';
 import { toast } from "../ui/use-toast";
-import { CreateUpdateEmployeeType, IEmployeeCreateRes, createEmployee, createUpdateEmployeeSchema, initialValues, updateEmployee } from "./form.config";
+import { CreateUpdateEmployeeType, IEmployeeCreateRes, initialValues, updateEmployee } from "./form.config";
 
 interface IRowData{
   _id?: string;
@@ -24,7 +24,7 @@ interface IRowData{
   designation: {
     _id: string;
   };
-  district_id:{
+  district:{
     _id?: string;
   };
   upazila:{
@@ -33,32 +33,30 @@ interface IRowData{
   union:{
     _id?: string;
   };
-  office_location: string;
+  office_address: string;
   gender: string;
 }
 
 interface IProps{
     setIsOpen: Dispatch<SetStateAction<boolean>>
     isOpen: boolean;
-    id?: number | string;
-    rowData?: IRowData;
+    id: number | string;
+    rowData: IRowData;
 }
 
-export function EmployeeCreateUpdate({isOpen,setIsOpen, id, rowData}: IProps) {
+export function EmployeeUpdate({isOpen,setIsOpen, id, rowData}: IProps) {
   const queryClient = useQueryClient();
   const [districtId, setDistrictId] = useState<string>("")
   const [upazila, setUpazila] = useState<string>("")
-  // const [union, setUnion] = useState<string>("")
   
   const {data: dataGetAllDistrict, isLoading: isLoadingGetAllDistrict} = useGetAllDistrictList()
   const {data: dataGetAllUpazila, isLoading: isLoadingGetAllUpazila} = useGetAllUpazilaByDistrict({id: districtId})
-  const {data: dataGetAllUnion, isLoading: isLoadingGetAllUnion} = useGetAllUnionByUpazila({id: upazila})
+  const {data: dataGetAllUnion, isLoading: isLoadingGetAllUnion} = useGetAllUnionByUpazila({id:upazila })
   const {data: dataGetAllDesignation, isLoading: isLoadingGetAllDesignation} = useGetAllDesignationList()
-
 
   useEffect(()=>{
     if(id){
-      setDistrictId(rowData?.district_id?._id as string )
+      setDistrictId(rowData?.district?._id as string )
     }
   }, [id])
 
@@ -68,15 +66,8 @@ export function EmployeeCreateUpdate({isOpen,setIsOpen, id, rowData}: IProps) {
     }
   }, [id])
 
-  // useEffect(()=>{
-  //   if(id){
-  //     setUnion(rowData?.union?._id as string )
-  //   }
-  // }, [id])
-  
   const {mutate} = useMutation(
-    id ? updateEmployee :
-    createEmployee, 
+     updateEmployee ,
     {
       onSuccess: (data: IEmployeeCreateRes) => {
         console.log({data})
@@ -107,14 +98,26 @@ export function EmployeeCreateUpdate({isOpen,setIsOpen, id, rowData}: IProps) {
     }
   );
 
-    const onSubmit =  (values: CreateUpdateEmployeeType) => mutate(values);
+    const onSubmit = async (values: CreateUpdateEmployeeType) => await mutate(values);
     
     return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen} >
       <h3 className="leading-6 font-semibold mb-6">{id? "Update": "Create"} Employee</h3>
       <Formik 
-        initialValues={ initialValues}
-        validationSchema={createUpdateEmployeeSchema}
+        initialValues={id ? {
+          id: rowData?._id,
+          first_name: rowData?.first_name,
+          last_name: rowData?.last_name,
+          email: rowData?.email,
+          phone: rowData?.phone,
+          designation: rowData?.designation?._id,
+          district: rowData?.district?._id,
+          upazila: rowData?.upazila?._id,
+          union: rowData?.union?._id,
+          gender: rowData?.gender,
+          office_address: rowData?.office_address,
+        } as CreateUpdateEmployeeType : initialValues}
+        // validationSchema={createUpdateEmployeeSchema}
         onSubmit={onSubmit}
       >
         {()=>
@@ -237,31 +240,7 @@ export function EmployeeCreateUpdate({isOpen,setIsOpen, id, rowData}: IProps) {
                 />
               </div>
             </div>
-            
-            <div className="flex gap-3">
-              <div className="flex-1">
-                <FormikTextField
-                  name="password"
-                  props={{
-                    label: "Password",
-                    placeholder:"Password",
-                    password: true
-                  }}
-                />
-              </div>
-              <div className="flex-1">
-                <FormikTextField
-                  name="confirm_password"
-                  props={{
-                    label: "Confirm Password",
-                    placeholder:"Confirm Password",
-                    password: true
-                  }}
-                />
-              </div>
-            </div>
-            
-            <FormikSubmitButton className="mt-3">Submit</FormikSubmitButton>
+            <FormikSubmitButton className="mt-3">Update</FormikSubmitButton>
           </Form>
         }
       </Formik>

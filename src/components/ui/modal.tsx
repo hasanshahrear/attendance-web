@@ -9,7 +9,7 @@ interface IProps{
 
 export function Modal({isOpen, setIsOpen, children}:IProps){
     return <Transition appear show={isOpen} as={Fragment}>
-    <Dialog as="div" className="relative z-10" onClose={()=>{setIsOpen(false)}}>
+    <Dialog as="div" className="relative z-10 overflow-visible" onClose={()=>{setIsOpen(false)}}>
       <Transition.Child
         as={Fragment}
         enter="ease-out duration-300"
@@ -33,7 +33,7 @@ export function Modal({isOpen, setIsOpen, children}:IProps){
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+            <Dialog.Panel className="w-full max-w-lg transform overflow-visible rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
               
               {children}
             </Dialog.Panel>
