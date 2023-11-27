@@ -20,9 +20,9 @@ export default function DashboardLayout({
           <MenuItem component={<Link href="/dashboard/designation" />} > Designation </MenuItem>
           <MenuItem component={<Link href="/dashboard/employee" />} > Employee </MenuItem>
           <MenuItem component={<Link href="/dashboard/holiday" />} > Holiday </MenuItem>          
+          <MenuItem component={<Link href="/dashboard/weekend" />} > Weekend </MenuItem>          
           <SubMenu label="Reports">
             <MenuItem component={<Link href="/dashboard/reports" />} > Today Reports </MenuItem>
-            <MenuItem> Line charts </MenuItem>
           </SubMenu>
         </Menu>
       </Sidebar>

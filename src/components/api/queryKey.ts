@@ -21,5 +21,8 @@ export enum QueryKey {
 
     // Holidays
     GetAllHolidays = "get-all-holiday",
+
+    // Weekend
+    GetAllWeekend = "get-all-weekend",
 }
   
