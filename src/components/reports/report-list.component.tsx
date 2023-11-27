@@ -1,15 +1,121 @@
 import { useQuery } from "@tanstack/react-query"
+import { Form, Formik } from "formik"
+import { useState } from "react"
+import { useGetAllDistrictList } from "../hooks/useGetAllDistrictList"
+import { useGetAllUnionByUpazila } from "../hooks/useGetAllUnionByUpazila"
+import { useGetAllUpazilaByDistrict } from "../hooks/useGetAllUpazilaByDistrict"
+import { FormikResetButton } from "../ui/form"
+import { FormikReactSelect } from "../ui/form/formik-react-select.component"
+import { FormikSubmitButton } from "../ui/form/formik-submit-button.component"
 import { getData } from "./config"
+
+const remarksData = [
+    {
+        value: "present",
+        label: "Present",
+    },
+    {
+        value: "absent",
+        label: "Absent",
+    },
+    {
+        value: "leave",
+        label: "Leave",
+    }
+]
 
 export function Reports(){
 
+    const [districtId, setDistrictId] = useState<string>("")
+    const [upazila, setUpazila] = useState<string>("")
+    const [queryParams, setQueryParams] = useState<object>({})
+    
+    const {data: dataGetAllDistrict, isLoading: isLoadingGetAllDistrict} = useGetAllDistrictList()
+    const {data: dataGetAllUpazila, isLoading: isLoadingGetAllUpazila} = useGetAllUpazilaByDistrict({id: districtId})
+    const {data: dataGetAllUnion, isLoading: isLoadingGetAllUnion} = useGetAllUnionByUpazila({id: upazila})
+  
+  
+  
+
     const {data, isLoading, isError} = useQuery({
-        queryKey: ["all-report"],
-        queryFn:() => getData(),
+        queryKey: ["all-report", queryParams],
+        queryFn:() => getData(queryParams),
     })
+    const onSubmit = async (value: any) =>  {
+        setQueryParams(value as any)
+        return ;
+    }
+
+    
 
     return (
         <div className="px-5 lg:px-10 gap-10 flex flex-col mb-10">
+            <div>
+                <Formik
+                    initialValues={{}}
+                    onSubmit={onSubmit}
+                >
+                    {({setFieldValue, values}) => {
+                       return <Form className="flex gap-3 items-end">
+                        <FormikReactSelect
+                            name="remarks" 
+                            label="Remarks"
+                            options={remarksData}
+                        />
+                        
+                        <FormikReactSelect
+                            name="district" 
+                            label="District"
+                            isLoading={isLoadingGetAllDistrict}
+                            options={dataGetAllDistrict?.data?.map((item)=> ({
+                                value: item?._id,
+                                label: item?.district_name
+                            }))}
+                            requiredIcon="*"
+                            onSelect={(value:any)=>{
+                                setDistrictId(value?.value as string)
+                                setUpazila("");
+                                setFieldValue("upazila", "")
+                                setFieldValue("union", "")
+                            }}
+                        />
+                    
+                        <FormikReactSelect
+                            name="upazila" 
+                            label="Upazila"
+                            isLoading={isLoadingGetAllUpazila}
+                            options={dataGetAllUpazila?.data?.map((item)=> ({
+                                value: item?._id,
+                                label: item?.sub_district_name
+                            }))}
+                            requiredIcon="*"
+                            onSelect={(value:any)=>{
+                                setUpazila(value?.value as string)
+                                setFieldValue("union", "")
+                            }}
+                        />
+                        {
+                            values?.upazila ? (
+                                <FormikReactSelect
+                                name="union" 
+                                label="Union"
+                                isLoading={isLoadingGetAllUnion}
+                                options={dataGetAllUnion?.data?.map((item)=> ({
+                                    value: item?._id,
+                                    label: item?.union_name
+                                }))}
+                                requiredIcon="*"
+                            />
+
+                            ) : ""
+                        }
+                            
+                        <FormikSubmitButton >Filter</FormikSubmitButton>
+                        <FormikResetButton>Reset</FormikResetButton>
+                    </Form>
+                    }}
+              </Formik>
+            </div>
             {
                data && data?.data?.length > 0 ? data?.data?.map((union: any, i : any) => {
                 return ( 
