@@ -34,7 +34,7 @@ function DateField({
   const generatedID = useId();
   const inputId = id || generatedID;
   const {setFieldValue, values}  = useFormikContext();
-  const [date, setDate] = useState<Date>(new Date())
+  const [date, setDate] = useState<Date>()
 
   useEffect(()=>{
     if(date){
