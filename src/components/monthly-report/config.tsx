@@ -6,12 +6,15 @@ type TQuery = {
   upazila?: string,
   union?: string,
   remarks?: string,
-  date?: Date,
+  fromDate?: Date,
+  toDate?: Date,
 }
 export const getData = async (queryParams: TQuery) => {
 
-  const { remarks, district, upazila, union, date } = queryParams;
-  console.log({date})
+  const { remarks, district, upazila, union, fromDate, toDate } = queryParams;
+  console.log({fromDate})
+  console.log({toDate})
+
 
    // Create an array to hold valid query parameters
   const validParams = [];
@@ -21,13 +24,17 @@ export const getData = async (queryParams: TQuery) => {
   if (district) validParams.push(`district=${district}`);
   if (upazila) validParams.push(`upazila=${upazila}`);
   if (union) validParams.push(`union=${union}`);
-  if (date) {
-    const formattedDate = new Date(date).toLocaleDateString();
-    validParams.push(`date=${formattedDate}`);
+  if (fromDate) {
+    const formattedDate = new Date(fromDate).toLocaleDateString();
+    validParams.push(`fromDate=${formattedDate}`);
+  }
+  if (toDate) {
+    const formattedDate = new Date(toDate).toLocaleDateString();
+    validParams.push(`toDate=${formattedDate}`);
   }
 
   // Construct the URL with valid query parameters
-  const url = `${Api.Reports}${validParams.length > 0 ? `?${validParams.join('&')}` : ''}`;
+  const url = `${Api.MonthlyReports}${validParams.length > 0 ? `?${validParams.join('&')}` : ''}`;
 
     const res = await ApiClient.get(url)
     return res?.data

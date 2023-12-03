@@ -21,8 +21,11 @@ export default function DashboardLayout({
           <MenuItem component={<Link href="/dashboard/employee" />} > Employee </MenuItem>
           <MenuItem component={<Link href="/dashboard/holiday" />} > Holiday </MenuItem>          
           <MenuItem component={<Link href="/dashboard/weekend" />} > Weekend </MenuItem>          
-          <SubMenu label="Reports">
-            <MenuItem component={<Link href="/dashboard/reports" />} > Today Reports </MenuItem>
+          <SubMenu label="Daily Reports">
+            <MenuItem component={<Link href="/dashboard/reports" />} > Attendance Reports </MenuItem>
+          </SubMenu>
+          <SubMenu label="Monthly Reports">
+            <MenuItem component={<Link href="/dashboard/monthly-reports" />} > Attendance Reports </MenuItem>
           </SubMenu>
         </Menu>
       </Sidebar>

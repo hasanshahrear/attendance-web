@@ -24,7 +24,7 @@ const remarksData = [
     }
 ]
 
-export function Reports(){
+export function MonthlyReports(){
 
     const [districtId, setDistrictId] = useState<string>("")
     const [upazila, setUpazila] = useState<string>("")
@@ -59,9 +59,15 @@ export function Reports(){
                     {({setFieldValue, values}) => {
                        return <Form className="flex gap-3 items-end">
                         <FormikDateField
-                            name="date"
+                            name="fromDate"
                             props={{
-                                label:"Date",
+                                label:"From Date",
+                            }}
+                        />
+                        <FormikDateField
+                            name="toDate"
+                            props={{
+                                label:"To Date",
                             }}
                         />
                         <FormikReactSelect

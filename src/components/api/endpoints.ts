@@ -39,5 +39,6 @@ export enum Api {
 
 
   // Reports
-  Reports = `${ApiPrefix}/report/all`
+  Reports = `${ApiPrefix}/report/all`,
+  MonthlyReports = `${ApiPrefix}/report/monthly`
 }

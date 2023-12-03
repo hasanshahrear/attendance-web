@@ -34,7 +34,7 @@ function DateField({
   const generatedID = useId();
   const inputId = id || generatedID;
   const {setFieldValue, values}  = useFormikContext();
-  const [date, setDate] = useState<Date>()
+  const [date, setDate] = useState<Date>(new Date())
 
   useEffect(()=>{
     if(date){
@@ -43,7 +43,7 @@ function DateField({
   }, [date])
 
   return (
-    <>
+    <div className="w-full">
       <div className="mb-2">
         {label && (
           <label
@@ -73,13 +73,16 @@ function DateField({
             selected={date}
             onSelect={setDate}
             initialFocus
+            disabled={(date) =>
+              date > new Date() || date < new Date("1900-01-01")
+            }
           />
         </PopoverContent>
       </Popover>
 
       {error && <small className={"p-error"}>{helperText}</small>}
       {helperText && !error && <small>{helperText}</small>}
-    </>
+    </div>
   );
 }
 
