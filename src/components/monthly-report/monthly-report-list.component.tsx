@@ -214,9 +214,9 @@ export function MonthlyReports(){
 }
 
 
-const GroupedByUserIdComponent = ({ upazila }) => {
+const GroupedByUserIdComponent = ({ upazila }:any) => {
     // Grouping the data by user_id
-    const groupedData = upazila?.data.reduce((acc, info) => {
+    const groupedData = upazila?.data.reduce((acc:any, info:any) => {
       const userId = info?.user?._id;
       if (!acc[userId]) {
         acc[userId] = [];
@@ -245,7 +245,7 @@ const GroupedByUserIdComponent = ({ upazila }) => {
                     {/* <p>{upazila?.union?.union_name}</p> */}
                     <p>{groupedData[userId][0]?.user?.first_name}{" "}{groupedData[userId][0]?.user?.last_name}</p>
                     <p>{groupedData[userId][0]?.user?.phone}</p>
-                    {groupedData[userId].map((info, index) => (
+                    {groupedData[userId].map((info:any, index:any) => (
                     <tr key={`${userId}-${index}`} className="p-5">
                         {/* Render the grouped data properties here */}
                         {/* <td className="text-left p-4 border border-slate-400">{info?.user?.first_name + " " + info?.user?.last_name}</td> */}
